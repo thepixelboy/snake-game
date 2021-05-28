@@ -28,3 +28,13 @@ class Snake:
 
     # moving first snake's segment 20 spaces
     self.snake_segments[0].forward(MOVE_DISTANCE)
+
+
+  def left(self):
+    """Moves the snake to the left"""
+    self.snake_segments[0].left(90)
+
+  def right(self):
+    """Moves the snake to the righ"""
+    self.snake_segments[0].right(90)
+  

@@ -15,10 +15,15 @@ game_is_on = True
 # Creating the snake body
 snake = Snake()
 
+# Listening for keypress to move the snake to the left or to the right
+screen.listen()
+screen.onkey(snake.left, "Left")
+screen.onkey(snake.right, "Right")
+
 while game_is_on:
   screen.update()
   time.sleep(0.1)
-  # moving the snake
+  # move the snake
   snake.move()
   
 
