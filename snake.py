@@ -2,6 +2,10 @@ from turtle import Turtle
 
 SNAKE_STARTING_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
 MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
 
 class Snake:
   
@@ -9,6 +13,7 @@ class Snake:
     self.segments = []
     self.create_snake()
     self.head = self.segments[0]
+    self.last_direction = self.head.heading()
 
   def create_snake(self):
     """Creates the snake body"""
@@ -35,15 +40,27 @@ class Snake:
       new_y_position = self.segments[seg_num - 1].ycor()
       self.segments[seg_num].goto(new_x_position, new_y_position)
 
-    # moving first snake's segment 20 spaces
-    self.segments[0].forward(MOVE_DISTANCE)
+    # moving first snake's segment 20 spaces and updating last_direction
+    self.head.forward(MOVE_DISTANCE)
+    self.last_direction = self.head.heading() 
 
+  def up(self):
+    """Moves the snake up"""
+    if self.head.heading() != DOWN and self.last_direction != DOWN:
+      self.head.setheading(UP)
+
+  def down(self):
+    """Moves the snake down"""
+    if self.head.heading() != UP and self.last_direction != UP:
+      self.head.setheading(DOWN)
 
   def left(self):
     """Moves the snake to the left"""
-    self.segments[0].left(90)
+    if self.head.heading() != RIGHT and self.last_direction != RIGHT:
+      self.head.setheading(LEFT)
 
   def right(self):
     """Moves the snake to the righ"""
-    self.segments[0].right(90)
+    if self.head.heading() != LEFT and self.last_direction != LEFT:
+      self.head.setheading(RIGHT)
   

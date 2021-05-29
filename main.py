@@ -19,10 +19,12 @@ snake = Snake()
 food = Food()
 scoreboard = Scoreboard()
 
-# Listening for keypress to move the snake to the left or to the right
+# Listening for keypress to move the snake
 screen.listen()
-screen.onkey(snake.left, "Left")
-screen.onkey(snake.right, "Right")
+screen.onkeypress(snake.up, "Up")
+screen.onkeypress(snake.down, "Down")
+screen.onkeypress(snake.left, "Left")
+screen.onkeypress(snake.right, "Right")
 
 while game_is_on:
   screen.update()
@@ -39,6 +41,7 @@ while game_is_on:
   # detect collision with wall
   if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
     game_is_on = False
+    screen_flash()
     scoreboard.game_over()
 
   # detect collision with tail
@@ -47,6 +50,12 @@ while game_is_on:
   for segment in snake.segments[1:]:
     if snake.head.distance(segment) < 10:
       game_is_on = False
+      screen_flash()
       scoreboard.game_over()
+
+  def screen_flash():
+    screen.bgcolor("red")
+    time.sleep(0.3)
+    screen.bgcolor("black")
 
 screen.exitonclick()
