@@ -44,6 +44,13 @@ class Snake:
     self.head.forward(MOVE_DISTANCE)
     self.last_direction = self.head.heading() 
 
+  def reset(self):
+    for seg in self.segments:
+      seg.hideturtle()
+    self.segments.clear()
+    self.create_snake()
+    self.head = self.segments[0]
+
   def up(self):
     """Moves the snake up"""
     if self.head.heading() != DOWN and self.last_direction != DOWN:

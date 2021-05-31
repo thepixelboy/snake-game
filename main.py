@@ -40,18 +40,18 @@ while game_is_on:
 
   # detect collision with wall
   if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-    game_is_on = False
     screen_flash()
-    scoreboard.game_over()
+    scoreboard.reset()
+    snake.reset()
 
   # detect collision with tail
   # slicing the snake.segment list on the for loop to start
   # iterating at the position one of the list
   for segment in snake.segments[1:]:
     if snake.head.distance(segment) < 10:
-      game_is_on = False
       screen_flash()
-      scoreboard.game_over()
+      scoreboard.reset()
+      snake.reset()
 
   def screen_flash():
     screen.bgcolor("red")
